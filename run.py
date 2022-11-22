@@ -1,4 +1,4 @@
-import requests, os, shutil, mimetypes, zippyshare_downloader as ZippyDL
+import requests, json, os, shutil, mimetypes, zippyshare_downloader as ZippyDL
 from tqdm.auto import tqdm
 from bs4 import BeautifulSoup as bs
 
@@ -6,7 +6,8 @@ from bs4 import BeautifulSoup as bs
 def GetZippyURL(query: str) -> list:
     try:
         URLData = []
-        data = requests.get(f"https://arzxh.herokuapp.com/api/otakudesu?query={query}")
+        response = requests.get(f"https://arzxh.herokuapp.com/api/otakudesu?query={query}")
+        data = json.loads(response.text)
         episode = data["episode"]
         for eps in episode:
             link = [
