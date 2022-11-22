@@ -3,7 +3,7 @@ from tqdm.auto import tqdm
 from bs4 import BeautifulSoup as bs
 
 
-def GetZippyURL(query) -> list:
+def GetZippyURL(query: str) -> list:
     try:
         URLData = []
         data = requests.get(f"https://arzxh.herokuapp.com/api/otakudesu?query={query}")
@@ -34,8 +34,8 @@ def Download(url: str):
                 with open(f"{title}", "wb") as output:
                     shutil.copyfileobj(raw, output)
         return
-    except Exception as e:
-        raise e
+    except:
+        pass
 
 
 def Main():
